@@ -78,5 +78,34 @@ namespace linkedList
                 }
             }
         }
+        public void addItemAnywhere(int data, int position)
+        {
+            Node newNode = new Node(data);
+            int currentPosition;
+
+            if (position <= 0)
+            {
+                // Add at the beginning of the list
+                newNode.next = head;
+                head = newNode;
+            }
+            else
+            {
+                Node currentNode = head;
+                Node prevNode = null;
+                currentPosition = 0;
+
+                while (currentNode != null && currentPosition < position)
+                {
+                    prevNode = currentNode;
+                    currentNode = currentNode.next;
+                    currentPosition++;
+                }
+
+                // Insert the new node
+                prevNode = currentNode;
+                currentNode = currentNode.next;
+            }
+        }
     }
 }
