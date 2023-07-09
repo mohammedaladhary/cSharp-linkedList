@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,8 +45,38 @@ namespace linkedList
         }
         public void remove(int data)
         {
-
+            //head is null
+            if (head == null)
+            {
+                Console.WriteLine("Linked List is empty");
+                return; // to avoid the exception when it occurs.
+            }
+            //head is not null
+            else
+            {
+                // delete head
+                if (head.data == data)
+                {
+                    head = head.next;
+                }
+                else
+                {
+                    Node currentNode = head;
+                    Node prevNode = null;
+                    while(currentNode != null && currentNode.data!= data)
+                    {
+                        prevNode = currentNode;
+                        currentNode = currentNode.next;
+                    }
+                    if(currentNode == null)
+                    {
+                        var a = $"{data} is not Found in the linked list";
+                        Console.WriteLine($"({a})");
+                        return; // to avoid the exception when it occurs.
+                    }
+                    prevNode.next = currentNode.next;
+                }
+            }
         }
-
     }
 }

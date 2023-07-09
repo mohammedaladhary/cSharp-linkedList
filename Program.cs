@@ -10,8 +10,13 @@
             list.insert(20);
             list.insert(30);
             list.insert(40);
-            Console.WriteLine();
+
             Console.WriteLine("Original list:");
+            list.display();
+            list.remove(30);
+            list.remove(50);
+            Console.WriteLine();
+            Console.WriteLine("Updated list:");
             list.display();
 
         }
