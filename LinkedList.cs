@@ -9,102 +9,139 @@ namespace linkedList
 {
     internal class LinkedList
     {
-        private Node head;
-       public LinkedList() 
+        private Node Head;
+        public LinkedList()
         {
-            head = null;
+            Head = null;
         }
 
         public void insert(int data)
         {
             Node newNode = new Node(data);
 
-            if(head == null)
+            if (Head == null)
             {
-                head = newNode;
+                Head = newNode;
             }
             else
             {
-                Node currentNode = head;
-                while(currentNode.next != null)
+                Node currentNode = Head;
+                while (currentNode.Next != null)
                 {
-                    currentNode = currentNode.next;
+                    currentNode = currentNode.Next;
                 }
-                currentNode.next = newNode;
+                currentNode.Next = newNode;
             }
         }
         public void display()
         {
-            Node node = head;   
-            while(node != null)
+            Node node = Head;
+            while (node != null)
             {
                 Console.Write(node.data + " "); //prints them into a raw
                 //Console.WriteLine(node.data);   //prints them into a column
-                node = node.next;
+                node = node.Next;
             }
         }
         public void remove(int data)
         {
-            //head is null
-            if (head == null)
+            //Head is null
+            if (Head == null)
             {
                 Console.WriteLine("Linked List is empty");
                 return; // to avoid the exception when it occurs.
             }
-            //head is not null
+            //Head is not null
             else
             {
-                // delete head
-                if (head.data == data)
+                // delete Head
+                if (Head.data == data)
                 {
-                    head = head.next;
+                    Head = Head.Next;
                 }
                 else
                 {
-                    Node currentNode = head;
+                    Node currentNode = Head;
                     Node prevNode = null;
-                    while(currentNode != null && currentNode.data!= data)
+                    while (currentNode != null && currentNode.data != data)
                     {
                         prevNode = currentNode;
-                        currentNode = currentNode.next;
+                        currentNode = currentNode.Next;
                     }
-                    if(currentNode == null)
+                    if (currentNode == null)
                     {
                         var a = $"{data} is not Found in the linked list";
                         Console.WriteLine($"({a})");
                         return; // to avoid the exception when it occurs.
                     }
-                    prevNode.next = currentNode.next;
+                    prevNode.Next = currentNode.Next;
                 }
             }
         }
-        public void addItemAnywhere(int data, int position)
+        public void addNodeAnyPoint(int data, int position)
         {
             Node newNode = new Node(data);
-            int currentPosition;
-
-            if (position <= 0)
+            if (position == 0)
             {
-                // Add at the beginning of the list
-                newNode.next = head;
-                head = newNode;
+                newNode.Next = Head;
+                Head = newNode;
             }
             else
             {
-                Node currentNode = head;
-                Node prevNode = null;
-                currentPosition = 0;
+                Node current = Head;
+                Node previous = null;
+                int count = 0;
 
-                while (currentNode != null && currentPosition < position)
+                while (current != null && count < position)
                 {
-                    prevNode = currentNode;
-                    currentNode = currentNode.next;
-                    currentPosition++;
+                    previous = current;
+                    current = current.Next;
+                    count++;
                 }
 
-                // Insert the new node
-                prevNode = currentNode;
-                currentNode = currentNode.next;
+                if (current == null)
+                {
+                    // Reached the end of the list
+                    previous.Next = newNode;
+                }
+                else
+                {
+                    newNode.Next = current;
+                    previous.Next = newNode;
+                }
+            }
+        }
+        public void dataGetPosition(int data)
+        {
+            Node current = Head;
+            int position = 0;
+
+            while (current != null)
+            {
+                if (current.data == data)
+                {
+                    Console.WriteLine("Data found at position: " + position);
+                    return;
+                }
+
+                current = current.Next;
+                position++;
+            }
+        }
+        public void positionGetData(int position)
+        {
+            Node current = Head;
+            int data = 0;
+            while (current != null)
+            {
+                if (current.data == position)
+                {
+                    Console.WriteLine("Data result for the position entered : " + data);
+                    return;
+                }
+
+                current = current.Next;
+                position++;
             }
         }
     }
